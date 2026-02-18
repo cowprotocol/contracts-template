@@ -38,3 +38,20 @@ forge snapshot
 ```shell
 forge script script/Counter.s.sol:CounterScript --rpc-url <your_rpc_url> --private-key <your_private_key>
 ```
+
+## New project creation checklist
+
+The following operations need to be performed after this repository has been created.
+
+-[ ] In GitHub repo settings:
+    -[ ] Add a new ruleset called "Protected branches" and include the following changes:
+        - Enforcement status: active
+        - Target branches: Include default branch
+        - Require linear history
+        - Require a pull request before merging
+          - Required approvals: 1
+          - Allowed merge methods: Squash
+        - Block force pushes
+    -[ ] In General → Features → Pull requests:
+        - Default commit message for merge and squash commits: Pull request title and description
+        - Disable merge commits
