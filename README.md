@@ -56,4 +56,5 @@ The following operations need to be performed after this repository has been cre
         - Select "Pull request title and description" in "Default commit message" option
         - Unckeck "Allow merge commits" option
         - Check "Allow auto-merge" option
+- [ ] Run `forge install` to install the dependencies. This will create a new `foundry.lock` file which you should commit to the project
 - [ ] Once all entries in this list are checked, delete this section from the readme
