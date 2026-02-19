@@ -55,4 +55,5 @@ The following operations need to be performed after this repository has been cre
     -[ ] In General → Features → Pull requests:
         - Select "Pull request title and description" in "Default commit message" option
         - Unckeck "Allow merge commits" option
+        - Check "Allow auto-merge" option
 -[ ] Once all entries in this list are checked, delete this section from the readme
