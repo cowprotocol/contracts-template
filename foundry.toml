@@ -2,6 +2,7 @@
 src = "src"
 out = "out"
 libs = ["lib"]
+solc = "0.8.33" # See latest release at: https://github.com/argotorg/solidity/releases
 
 [fmt]
 sort_imports = true

@@ -57,4 +57,5 @@ The following operations need to be performed after this repository has been cre
         - Unckeck "Allow merge commits" option
         - Check "Allow auto-merge" option
 - [ ] Run `forge install` to install the dependencies. This will create a new `foundry.lock` file which you should commit to the project
+- [ ] Make sure you use the [latest version of Solidity](https://github.com/argotorg/solidity/releases) by updating the `solc` version in `foundry.toml`
 - [ ] Once all entries in this list are checked, delete this section from the readme
