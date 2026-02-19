@@ -54,4 +54,4 @@ The following operations need to be performed after this repository has been cre
         - Block force pushes
     -[ ] In General → Features → Pull requests:
         - Default commit message for merge and squash commits: Pull request title and description
-        - Disable merge commits
+        - Unckeck "Allow merge commits" option
