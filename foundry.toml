@@ -7,5 +7,5 @@ libs = ["lib"]
 sort_imports = true
 
 [profile.ci]
-deny_warnings = true # Why not always: sometimes you just want to code and see what comes out
+deny = "warnings" # Why not always: sometimes you just want to code and see what comes out
 fuzz.seed = '0' # It makes CI reproducible, but still on a local machine it tries different parameters and so we can see edge cases if needed.
