@@ -1,0 +1,96 @@
+name: "CI"
+
+on:
+  workflow_dispatch:
+  pull_request:
+  push:
+    branches:
+      - "main"
+
+env:
+  # Add more RPC URLs as needed
+  ETH_RPC_URL: ${{ secrets.ETH_RPC_URL }}
+
+jobs:
+  build:
+    runs-on: "ubuntu-latest"
+    steps:
+      - name: "Setup"
+        uses: "./.github/actions/setup"
+
+      - name: "Build the contracts and print their size"
+        run: "forge build --sizes --deny warnings"
+
+      - name: "Add build summary"
+        run: |
+          echo "## Build result" >> $GITHUB_STEP_SUMMARY
+          echo "✅ Passed" >> $GITHUB_STEP_SUMMARY
+
+  format:
+    runs-on: "ubuntu-latest"
+    needs: build
+    steps:
+      - name: "Setup"
+        uses: "./.github/actions/setup"
+
+      - name: "Install solhint"
+        run: "npm i -g solhint"
+
+      - name: "Print solhint version"
+        run: "solhint --version"
+
+      - name: "Lint the code"
+        run: "make lint"
+
+      - name: "Add lint summary"
+        run: |
+          echo "## Lint result" >> $GITHUB_STEP_SUMMARY
+          echo "✅ Passed" >> $GITHUB_STEP_SUMMARY
+
+  slither:
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - name: "Setup"
+        uses: "./.github/actions/setup"
+
+      - name: "Build contracts in src/ folder"
+        run: forge build --build-info --skip test script
+
+      - name: "Run slither analyzer"
+        uses: crytic/slither-action@v0.4.0
+        with:
+          ignore-compile: false
+          slither-version: "0.11.0"
+          fail-on: "low"
+
+      - name: "Add slither summary"
+        run: |
+          echo "## Slither result" >> $GITHUB_STEP_SUMMARY
+          echo "✅ Passed" >> $GITHUB_STEP_SUMMARY
+
+  test:
+    runs-on: "ubuntu-latest"
+    needs: build
+    steps:
+      - name: "Setup"
+        uses: "./.github/actions/setup"
+
+      - name: "Generate a fuzz seed that changes weekly to avoid burning through RPC allowance"
+        run: >
+          echo "FOUNDRY_FUZZ_SEED=$(
+            echo $(($EPOCHSECONDS - $EPOCHSECONDS % 604800))
+          )" >> $GITHUB_ENV
+
+      - name: "Run the tests"
+        run: "FOUNDRY_PROFILE=ci forge test --force --isolate -vvv --show-progress --gas-snapshot-check true"
+
+      - name: "Check test coverage"
+        env:
+          COVERAGE_MIN: 100
+        run: make coverage-check
+
+      - name: "Add test summary"
+        run: |
+          echo "## Tests result" >> $GITHUB_STEP_SUMMARY
+          echo "✅ Passed" >> $GITHUB_STEP_SUMMARY

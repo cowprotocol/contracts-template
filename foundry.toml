@@ -2,11 +2,37 @@
 src = "src"
 out = "out"
 libs = ["lib"]
-solc = "0.8.33" # See latest release at: https://github.com/argotorg/solidity/releases
+fs_permissions = [
+    { access = "read-write", path = "./" },
+]
 
-[fmt]
-sort_imports = true
+# Compiler
+auto_detect_solc = false
+solc = "0.8.34" # See latest release at: https://github.com/argotorg/solidity/releases
+via_ir = true
+optimizer = true
+optimizer_runs = 100_000
+evm_version = "cancun"
+
+# Fuzz
+fuzz = { runs = 1_000 }
+invariant = { runs = 100, depth = 20, fail_on_revert = true }
 
 [profile.ci]
-deny = "warnings" # Why not always: sometimes you just want to code and see what comes out
-fuzz.seed = '0' # It makes CI reproducible, but still on a local machine it tries different parameters and so we can see edge cases if needed.
+  fuzz = { runs = 10_000 }
+  invariant = { runs = 100, depth = 100, fail_on_revert = true }
+  verbosity = 3 # outputs stack trace for failed tests only (https://book.getfoundry.sh/reference/config/testing)
+
+[fmt]
+bracket_spacing = true
+int_types = "long"
+line_length = 125
+multiline_func_header = "attributes_first"
+number_underscore = "thousands"
+quote_style = "double"
+tab_width = 4
+wrap_comments = true
+sort_imports = true
+
+[lint]
+  exclude_lints = ["asm-keccak256","unwrapped-modifier-logic","pascal-case-struct","mixed-case-function","unsafe-typecast","unsafe-cheatcode","unchecked-call","block-timestamp"]

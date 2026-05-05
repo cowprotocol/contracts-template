@@ -1,0 +1,19 @@
+name: "Setup"
+description: "Check out the repo and install Foundry"
+
+runs:
+  using: "composite"
+  steps:
+    - name: "Check out the repo"
+      uses: "actions/checkout@v4"
+      with:
+        submodules: recursive
+
+    - name: "Install Foundry"
+      uses: "foundry-rs/foundry-toolchain@v1"
+      with:
+        version: "stable"
+
+    - name: "Show the Foundry config"
+      shell: "bash"
+      run: "forge --version && echo '\n' && forge config"

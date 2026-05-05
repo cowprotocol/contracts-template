@@ -1,6 +1,7 @@
 # Compiler files
 cache/
 out/
+coverage
 
 # Ignores development broadcast logs
 !/broadcast
@@ -12,3 +13,16 @@ docs/
 
 # Dotenv file
 .env
+
+# Agents
+.claude
+.agents
+
+# Miscellaneous
+*.log
+.DS_Store
+.pnp.*
+lcov.info
+.gas-snapshot
+.cursorignore
+coverage.txt
