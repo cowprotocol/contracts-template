@@ -18,6 +18,8 @@ make help
 
 ### Deploy
 
+Add `--broadcast` to send the transaction. Add `--verify` to verify the contract using the Etherscan settings in `foundry.toml`.
+
 ```shell
 forge script script/Counter.s.sol:CounterScript --rpc-url <your_rpc_url> --private-key <your_private_key>
 ```
@@ -41,6 +43,7 @@ The following operations need to be performed after this repository has been cre
     - Check "Allow auto-merge" option
   - [ ] Configure secrets in the repository settings (e.g. `ETH_RPC_URL`):
     - In Settings → Secrets and variables → Actions → New repository secret
+    - Uncomment the `env` section in `.github/workflows/ci.yml` to use secrets in the CI workflow
 - [ ] Initialize the submodules with `git submodule update --init`
 - [ ] Install the dependencies with `forge install`. This will create a new `foundry.lock` file which you should commit to the project
 - [ ] Make sure you use the [latest version of Solidity](https://github.com/argotorg/solidity/releases) by updating the `solc` version in `foundry.toml`

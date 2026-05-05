@@ -1,5 +1,12 @@
 name: "CI"
 
+permissions: {}
+
+# Uncomment to use secrets
+# env:
+# ETHERSCAN_API_KEY: ${{ secrets.ETHERSCAN_API_KEY }}
+# ETH_RPC_URL: ${{ secrets.ETH_RPC_URL }}
+
 on:
   workflow_dispatch:
   pull_request:
@@ -7,14 +14,15 @@ on:
     branches:
       - "main"
 
-env:
-  # Add more RPC URLs as needed
-  ETH_RPC_URL: ${{ secrets.ETH_RPC_URL }}
-
 jobs:
   build:
     runs-on: "ubuntu-latest"
     steps:
+      - name: "Check out the repo"
+        uses: "actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5"
+        with:
+          submodules: recursive
+
       - name: "Setup"
         uses: "./.github/actions/setup"
 
@@ -30,6 +38,11 @@ jobs:
     runs-on: "ubuntu-latest"
     needs: build
     steps:
+      - name: "Check out the repo"
+        uses: "actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5"
+        with:
+          submodules: recursive
+
       - name: "Setup"
         uses: "./.github/actions/setup"
 
@@ -51,6 +64,11 @@ jobs:
     runs-on: ubuntu-latest
     needs: build
     steps:
+      - name: "Check out the repo"
+        uses: "actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5"
+        with:
+          submodules: recursive
+
       - name: "Setup"
         uses: "./.github/actions/setup"
 
@@ -58,7 +76,7 @@ jobs:
         run: forge build --build-info --skip test script
 
       - name: "Run slither analyzer"
-        uses: crytic/slither-action@v0.4.0
+        uses: crytic/slither-action@f197989dea5b53e986d0f88c60a034ddd77ec9a8
         with:
           ignore-compile: false
           slither-version: "0.11.0"
@@ -73,6 +91,11 @@ jobs:
     runs-on: "ubuntu-latest"
     needs: build
     steps:
+      - name: "Check out the repo"
+        uses: "actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5"
+        with:
+          submodules: recursive
+
       - name: "Setup"
         uses: "./.github/actions/setup"
 

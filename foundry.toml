@@ -3,7 +3,7 @@ src = "src"
 out = "out"
 libs = ["lib"]
 fs_permissions = [
-    { access = "read-write", path = "./" },
+  { access = "read-write", path = "./" },
 ]
 
 # Compiler
@@ -13,6 +13,12 @@ via_ir = true
 optimizer = true
 optimizer_runs = 100_000
 evm_version = "cancun"
+
+# Keep deployment bytecode stable. This helps deterministic deployments because
+# metadata changes (like compiler version) will not change the final bytecode hash.
+# See: https://docs.soliditylang.org/en/latest/metadata.html#encoding-of-the-metadata-hash-in-the-bytecode
+bytecode_hash = "none"
+cbor_metadata = false
 
 # Fuzz
 fuzz = { runs = 1_000 }
@@ -35,4 +41,11 @@ wrap_comments = true
 sort_imports = true
 
 [lint]
-  exclude_lints = ["asm-keccak256","unwrapped-modifier-logic","pascal-case-struct","mixed-case-function","unsafe-typecast","unsafe-cheatcode","unchecked-call","block-timestamp"]
+exclude_lints = ["asm-keccak256","unwrapped-modifier-logic","pascal-case-struct","mixed-case-function","unsafe-typecast","unsafe-cheatcode","unchecked-call","block-timestamp"]
+
+[rpc_endpoints]
+mainnet = "{ETH_RPC_URL}"
+
+# Note: as of Etherscan API v2, the API key is shared across all chains
+[etherscan]
+mainnet = { key = "${ETHERSCAN_API_KEY}", chain = 1 }

@@ -17,7 +17,7 @@ all: ## Build, fmt, slither, check coverage, and snapshot gas
 	make snapshot
 
 clean: ## Clean the project
-	forge clean --force
+	forge clean
 
 build: ## Build the contracts
 	forge build --force 
@@ -41,10 +41,10 @@ test: ## Run tests
 	forge test --force --isolate -vvv --show-progress --gas-snapshot-check true
 
 coverage-summary: ## Run tests and generate coverage summary
-	forge coverage --no-match-coverage "(test)" --force --report summary
+	forge coverage --no-match-coverage "(test|script)" --force --report summary
 
 coverage-lcov: ## Run tests and generate coverage lcov report
-	forge coverage --no-match-coverage "(test)" --force --report lcov
+	forge coverage --no-match-coverage "(test|script)" --force --report lcov
 
 COVERAGE_MIN := 100
 coverage-check: ## Check if test coverage is above the minimum
