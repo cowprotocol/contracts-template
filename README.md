@@ -16,6 +16,23 @@ To see all available make targets, run:
 make help
 ```
 
+### Add dependencies
+
+```shell
+forge install <dependency>
+```
+
+### Set up remappings
+
+In `remappings.txt`, add the remappings for the dependencies, e.g.:
+
+```
+@openzeppelin/contracts/=lib/openzeppelin-contracts/contracts/
+@openzeppelin/contracts-upgradeable/=lib/openzeppelin-contracts-upgradeable/contracts/
+```
+
+This will allow you to write shorter import paths in the contracts.
+
 ### Deploy
 
 Add `--broadcast` to send the transaction. Add `--verify` to verify the contract using the Etherscan settings in `foundry.toml`.

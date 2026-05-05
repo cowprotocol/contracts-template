@@ -1,0 +1,14 @@
+{
+  "ContractName_Proxy": {
+    "1": {
+      "address": "",
+      "transactionHash": ""
+    }
+  },
+  "ContractName_Implementation": {
+    "1": {
+      "address": "",
+      "transactionHash": ""
+    }
+  }
+}
