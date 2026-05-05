@@ -41,7 +41,7 @@ wrap_comments = true
 sort_imports = true
 
 [lint]
-exclude_lints = ["asm-keccak256","unwrapped-modifier-logic","pascal-case-struct","mixed-case-function","unsafe-typecast","unsafe-cheatcode","unchecked-call","block-timestamp"]
+exclude_lints = []
 
 [rpc_endpoints]
 mainnet = "{ETH_RPC_URL}"
