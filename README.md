@@ -6,7 +6,6 @@ This project is meant to be used as a templated during the creation of new Githu
 
 It will contain some useful configuration files and scripts, that can be used also with existing projects (manually copied).
 
-
 ## Usage
 
 ### Build
@@ -14,6 +13,10 @@ It will contain some useful configuration files and scripts, that can be used al
 ```shell
 forge build
 ```
+
+Project contracts should keep simple caret pragmas like `^0.8` so downstream projects can import them with older compatible Solidity 0.8 compilers.
+
+If specific features are needed (like PUSH0 in 0.8.20 for gas optimizations or transient storage/better `via-ir` in 0.8.34), you can use it but make sure to keep the caret (`^`).
 
 ### Test
 
@@ -44,18 +47,18 @@ forge script script/Counter.s.sol:CounterScript --rpc-url <your_rpc_url> --priva
 The following operations need to be performed after this repository has been created.
 
 - [ ] In GitHub repo settings:
-    - [ ] Add a new ruleset called "Protected branches" and include the following changes:
-        - Enforcement status: active
-        - Target branches: Include default branch
-        - Require linear history
-        - Require a pull request before merging
-          - Required approvals: 1
-          - Allowed merge methods: Squash
-        - Block force pushes
-    - [ ] In General → Features → Pull requests:
-        - Select "Pull request title and description" in "Default commit message" option
-        - Unckeck "Allow merge commits" option
-        - Check "Allow auto-merge" option
+  - [ ] Add a new ruleset called "Protected branches" and include the following changes:
+    - Enforcement status: active
+    - Target branches: Include default branch
+    - Require linear history
+    - Require a pull request before merging
+      - Required approvals: 1
+      - Allowed merge methods: Squash
+    - Block force pushes
+  - [ ] In General → Features → Pull requests:
+    - Select "Pull request title and description" in "Default commit message" option
+    - Unckeck "Allow merge commits" option
+    - Check "Allow auto-merge" option
 - [ ] Run `forge install` to install the dependencies. This will create a new `foundry.lock` file which you should commit to the project
 - [ ] Make sure you use the [latest version of Solidity](https://github.com/argotorg/solidity/releases) by updating the `solc` version in `foundry.toml`
 - [ ] Once all entries in this list are checked, delete this section from the readme
