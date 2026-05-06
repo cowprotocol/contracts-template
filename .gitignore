@@ -12,3 +12,12 @@ docs/
 
 # Dotenv file
 .env
+
+# Local development dependencies
+dev/node_modules/
+dev/.venv/
+
+# Local reports
+coverage.txt
+lcov.info
+.gas-snapshot
