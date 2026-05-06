@@ -1,0 +1,2 @@
+slither-analyzer==0.11.5
+pre-commit==4.3.0

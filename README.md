@@ -6,7 +6,6 @@ This project is meant to be used as a templated during the creation of new Githu
 
 It will contain some useful configuration files and scripts, that can be used also with existing projects (manually copied).
 
-
 ## Usage
 
 ### Build
@@ -27,6 +26,31 @@ forge test
 forge fmt
 ```
 
+### CI
+
+CI runs build, lint, Slither, tests, and coverage through `just`.
+The workflow installs Foundry, `just`, and the pinned local JS or Python dependencies needed by each job.
+
+### Pre-commit hooks
+
+Install `pre-commit` in the local Python venv with:
+
+```shell
+python -m venv dev/.venv
+dev/.venv/bin/pip install -r dev/requirements.txt
+dev/.venv/bin/pre-commit --version
+```
+
+Install the hooks with:
+
+```shell
+dev/.venv/bin/pre-commit install --hook-type pre-commit --hook-type pre-push
+```
+
+The pre-commit hook runs `just lint`.
+The pre-push hooks run `just test`, `just slither`, and `just coverage-check`.
+You can bypass hooks with `--no-verify`, but CI remains the source of truth.
+
 ### Gas Snapshots
 
 ```shell
@@ -44,18 +68,18 @@ forge script script/Counter.s.sol:CounterScript --rpc-url <your_rpc_url> --priva
 The following operations need to be performed after this repository has been created.
 
 - [ ] In GitHub repo settings:
-    - [ ] Add a new ruleset called "Protected branches" and include the following changes:
-        - Enforcement status: active
-        - Target branches: Include default branch
-        - Require linear history
-        - Require a pull request before merging
-          - Required approvals: 1
-          - Allowed merge methods: Squash
-        - Block force pushes
-    - [ ] In General → Features → Pull requests:
-        - Select "Pull request title and description" in "Default commit message" option
-        - Unckeck "Allow merge commits" option
-        - Check "Allow auto-merge" option
+  - [ ] Add a new ruleset called "Protected branches" and include the following changes:
+    - Enforcement status: active
+    - Target branches: Include default branch
+    - Require linear history
+    - Require a pull request before merging
+      - Required approvals: 1
+      - Allowed merge methods: Squash
+    - Block force pushes
+  - [ ] In General → Features → Pull requests:
+    - Select "Pull request title and description" in "Default commit message" option
+    - Unckeck "Allow merge commits" option
+    - Check "Allow auto-merge" option
 - [ ] Run `forge install` to install the dependencies. This will create a new `foundry.lock` file which you should commit to the project
 - [ ] Make sure you use the [latest version of Solidity](https://github.com/argotorg/solidity/releases) by updating the `solc` version in `foundry.toml`
 - [ ] Once all entries in this list are checked, delete this section from the readme

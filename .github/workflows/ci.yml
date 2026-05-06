@@ -1,0 +1,68 @@
+name: CI
+
+permissions: {}
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+env:
+  FOUNDRY_PROFILE: ci
+
+jobs:
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: ./.github/actions/setup
+      - name: Build
+        run: just build
+
+  lint:
+    name: Lint
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: ./.github/actions/setup
+      - name: Install Solhint
+        run: npm ci --prefix dev
+      - name: Lint
+        run: just lint
+
+  slither:
+    name: Slither
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: ./.github/actions/setup
+      - name: Install Slither
+        run: |
+          python -m venv dev/.venv
+          dev/.venv/bin/pip install -r dev/requirements.txt
+      - name: Slither
+        run: just slither
+
+  test:
+    name: Test
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: ./.github/actions/setup
+      - name: Test
+        run: just test
+
+  coverage:
+    name: Coverage
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: ./.github/actions/setup
+      - name: Coverage
+        run: just coverage-check
