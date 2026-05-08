@@ -49,13 +49,11 @@ dev/.venv/bin/slither --version
 Solhint uses the pinned local binary:
 
 ```shell
-dev/node_modules/.bin/solhint --max-warnings 0 'src/**/*.sol'
-dev/node_modules/.bin/solhint --max-warnings 0 'script/**/*.sol'
-dev/node_modules/.bin/solhint --max-warnings 0 'test/**/*.t.sol'
+dev/node_modules/.bin/solhint --max-warnings 0 '**/*.sol'
 ```
 
-The root config is for `src/` contracts.
-The `script/` and `test/` folders each have a small override config for their own style.
+The root config applies to all Solidity files.
+The `script/` and `test/` folders have a small override config for their own style.
 
 ### Gas Snapshots
 
