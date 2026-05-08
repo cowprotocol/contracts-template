@@ -1,15 +1,10 @@
 # yaml-language-server: $schema=https://json.schemastore.org/github-action.json
 name: Setup
-description: Checkout the repository and install Foundry and just.
+description: Install Foundry and just.
 
 runs:
   using: composite
   steps:
-    - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # action v6.0.2
-      with:
-        persist-credentials: false
-        submodules: recursive
-
     - uses: foundry-rs/foundry-toolchain@c7450ba673e133f5ee30098b3b54f444d3a2ca2d # action v1.8.0, installs Foundry v1.7.0
       with:
         version: v1.7.0
