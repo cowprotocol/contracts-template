@@ -1,5 +1,4 @@
 {
-  "compile_libraries": false,
   "detectors_to_exclude": "solc-version",
   "filter_paths": "(lib/|test/|script/)"
 }
