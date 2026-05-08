@@ -29,10 +29,11 @@ forge fmt
 ### Local tooling
 
 Solhint and Slither are pinned as local development dependencies under `dev/`.
+The pnpm setup waits 7 days before installing newly released packages, matching CoW repos and giving more review time than a 2-day delay.
 Install them with:
 
 ```shell
-npm install --prefix dev
+pnpm --dir dev install --frozen-lockfile
 python -m venv dev/.venv
 dev/.venv/bin/pip install -r dev/requirements.txt
 ```
