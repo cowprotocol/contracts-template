@@ -28,13 +28,11 @@ forge fmt
 
 ### Local tooling
 
-Solhint and Slither are pinned as local development dependencies under `dev/`.
-Install them with:
+Solhint and Slither are pinned as local development dependencies under `dev/`. Slither is managed by [`uv`](https://docs.astral.sh/uv/getting-started/installation/); install it before running the commands below.
 
 ```shell
 npm install --prefix dev
-python -m venv dev/.venv
-dev/.venv/bin/pip install -r dev/requirements.txt
+uv sync --project dev
 ```
 
 Use the local binaries when running these tools:
