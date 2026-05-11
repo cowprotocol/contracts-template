@@ -1,0 +1,11 @@
+[project]
+name = "contracts-template-dev"
+version = "0"
+description = "Local development dependencies for the contracts template."
+requires-python = ">=3.11"
+dependencies = [
+    "slither-analyzer==0.11.5",
+]
+
+[tool.uv]
+package = false
