@@ -4,6 +4,7 @@
   "private": true,
   "description": "Local development dependencies for the contracts template.",
   "license": "UNLICENSED",
+  "packageManager": "pnpm@10.33.2",
   "devDependencies": {
     "solhint": "6.2.1"
   }
