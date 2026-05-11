@@ -34,7 +34,7 @@ forge fmt
 
 Solhint and Slither are pinned as local development dependencies under `dev/`. Slither is managed by [`uv`](https://docs.astral.sh/uv/getting-started/installation/); install it before running the commands below.
 
-The pnpm setup waits 7 days before installing newly released packages, matching CoW repos and giving more review time than a 2-day delay.
+The pnpm and uv setups wait 7 days before installing newly released packages, matching CoW repos and giving more review time than a 2-day delay.
 
 Install tooling with:
 
