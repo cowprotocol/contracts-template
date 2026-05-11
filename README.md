@@ -10,7 +10,7 @@ It will contain some useful configuration files and scripts, that can be used al
 
 ### Just commands
 
-Install `just` on your machine, then run `just --list` to see the available commands.
+Install `just` on your machine, then run `just help` to see the available commands.
 
 The commands do not load `.env` files.
 For local deploys, pass RPC URLs and private keys through your shell or secret manager.

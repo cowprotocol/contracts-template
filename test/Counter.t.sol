@@ -14,6 +14,7 @@ contract CounterTest is Test {
 
     function test_Increment() public {
         counter.increment();
+        vm.snapshotGasLastCall("increment - success");
         assertEq(counter.number(), 1);
     }
 
