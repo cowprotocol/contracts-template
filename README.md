@@ -37,12 +37,14 @@ just fmt
 ### Local tooling
 
 Solhint and Slither are pinned as local development dependencies under `dev/`.
+
 The pnpm setup waits 7 days before installing newly released packages, matching CoW repos and giving more review time than a 2-day delay.
+
 Install them with:
 
 ```shell
 pnpm --dir dev install --frozen-lockfile
-python -m venv dev/.venv
+python3 -m venv dev/.venv
 dev/.venv/bin/pip install -r dev/requirements.txt
 ```
 
@@ -52,6 +54,17 @@ Use the local binaries when running these tools:
 dev/node_modules/.bin/solhint --version
 dev/.venv/bin/slither --version
 ```
+
+### Solhint
+
+Solhint uses the pinned local binary:
+
+```shell
+dev/node_modules/.bin/solhint --max-warnings 0 '**/*.sol'
+```
+
+The root config applies to all Solidity files.
+The `script/` and `test/` folders have a small override config for their own style.
 
 ### Gas Snapshots
 

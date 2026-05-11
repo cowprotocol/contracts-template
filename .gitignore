@@ -21,3 +21,6 @@ dev/.venv/
 coverage.txt
 lcov.info
 .gas-snapshot
+
+# pnpm cache
+.pnpm-store/
