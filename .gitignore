@@ -16,3 +16,7 @@ docs/
 # Local development dependencies
 dev/node_modules/
 dev/.venv/
+
+# pnpm cache
+.pnpm-store/
+dev/.pnpm-store/
