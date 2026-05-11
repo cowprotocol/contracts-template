@@ -55,10 +55,10 @@ jobs:
           persist-credentials: false
           submodules: recursive
       - uses: ./.github/actions/setup
+      - name: Install uv
+        uses: astral-sh/setup-uv@08807647e7069bb48b6ef5acd8ec9567f424441b # action v8.1.0
       - name: Install Slither
-        run: |
-          python -m venv dev/.venv
-          dev/.venv/bin/pip install -r dev/requirements.txt
+        run: uv sync --project dev --locked
       - name: Slither
         run: just slither
 

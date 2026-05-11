@@ -31,8 +31,7 @@ forge fmt
 Install `pre-commit` in the local Python venv with:
 
 ```shell
-python -m venv dev/.venv
-dev/.venv/bin/pip install -r dev/requirements.txt
+uv sync --project dev
 dev/.venv/bin/pre-commit --version
 ```
 
