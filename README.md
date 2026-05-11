@@ -33,7 +33,7 @@ Install them with:
 
 ```shell
 npm install --prefix dev
-python -m venv dev/.venv
+python3 -m venv dev/.venv
 dev/.venv/bin/pip install -r dev/requirements.txt
 ```
 
