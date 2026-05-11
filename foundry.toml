@@ -2,11 +2,14 @@
 src = "src"
 out = "out"
 libs = ["lib"]
-solc = "0.8.33" # See latest release at: https://github.com/argotorg/solidity/releases
+solc = "0.8.34" # See latest release at: https://github.com/argotorg/solidity/releases
 
 [fmt]
 sort_imports = true
+number_underscore = "thousands"
 
 [profile.ci]
 deny = "warnings" # Why not always: sometimes you just want to code and see what comes out
-fuzz.seed = '0' # It makes CI reproducible, but still on a local machine it tries different parameters and so we can see edge cases if needed.
+verbosity = 3 # Outputs stack traces for failed tests.
+fuzz.seed = "0"
+fuzz.runs = 10_000

@@ -14,6 +14,10 @@ It will contain some useful configuration files and scripts, that can be used al
 forge build
 ```
 
+Project contracts should keep simple caret pragmas like `^0.8` so downstream projects can import them with older compatible Solidity 0.8 compilers.
+
+If specific features are needed (like PUSH0 in 0.8.20 for gas optimizations or transient storage/better `via-ir` in 0.8.34), you can use it but make sure to keep the caret (`^`).
+
 ### Test
 
 ```shell
@@ -75,5 +79,7 @@ The following operations need to be performed after this repository has been cre
     - Unckeck "Allow merge commits" option
     - Check "Allow auto-merge" option
 - [ ] Run `forge install` to install the dependencies. This will create a new `foundry.lock` file which you should commit to the project
+- [ ] Set up [Local tooling](#local-tooling) so Solhint and Slither use the pinned project versions
+- [ ] Update the project details in `dev/package.json`, including `name` and `description`
 - [ ] Make sure you use the [latest version of Solidity](https://github.com/argotorg/solidity/releases) by updating the `solc` version in `foundry.toml`
 - [ ] Once all entries in this list are checked, delete this section from the readme
