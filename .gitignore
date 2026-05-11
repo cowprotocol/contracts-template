@@ -19,4 +19,3 @@ dev/.venv/
 
 # pnpm cache
 .pnpm-store/
-dev/.pnpm-store/
