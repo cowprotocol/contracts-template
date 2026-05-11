@@ -32,11 +32,11 @@ forge fmt
 
 ### Local tooling
 
-Solhint and Slither are pinned as local development dependencies under `dev/`. Slither is managed by [`uv`](https://docs.astral.sh/uv/getting-started/installation/); install it before running the commands below.
+Solhint and Slither are pinned as local development dependencies under `dev/`.
 
 The pnpm and uv setups wait 7 days before installing newly released packages, matching CoW repos and giving more review time than a 2-day delay.
 
-Install tooling with:
+Install them with:
 
 ```shell
 pnpm --dir dev install --frozen-lockfile
@@ -57,6 +57,17 @@ Slither uses the pinned local Python dependency and checks contracts under `src`
 ```shell
 dev/.venv/bin/slither src --config-file slither.config.json
 ```
+
+### Solhint
+
+Solhint uses the pinned local binary:
+
+```shell
+dev/node_modules/.bin/solhint --max-warnings 0 '**/*.sol'
+```
+
+The root config applies to all Solidity files.
+The `script/` and `test/` folders have a small override config for their own style.
 
 ### Gas Snapshots
 
