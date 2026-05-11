@@ -6,14 +6,14 @@ repos:
         entry: just lint
         language: system
         pass_filenames: false
-        stages: [pre-commit]
+        stages: [pre-push]
 
       - id: just-slither
         name: just slither
         entry: just slither
         language: system
         pass_filenames: false
-        stages: [pre-commit]
+        stages: [pre-push]
 
       - id: just-coverage-check
         name: just coverage-check

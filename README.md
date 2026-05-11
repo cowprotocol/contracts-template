@@ -26,11 +26,6 @@ forge test
 forge fmt
 ```
 
-### CI
-
-CI runs build, lint, Slither, tests, and coverage through `just`.
-The workflow installs Foundry, `just`, and the pinned local JS or Python dependencies needed by each job.
-
 ### Pre-commit hooks
 
 Install `pre-commit` in the local Python venv with:
