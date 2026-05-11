@@ -69,7 +69,9 @@ Licensed under either of [MIT license](LICENSE-MIT) or [Apache License, Version 
 
 The following operations need to be performed after this repository has been created.
 
-- [ ] Discuss and confirm the project license before starting implementation work
+- [ ] Discuss and confirm the project license before starting implementation work.
+  - [ ] MIT and Apache 2.0 are the two default licenses, but you can use any other license if it has been approved.
+  - [ ] Ideally, choose only one license for the project.
 - [ ] In GitHub repo settings:
   - [ ] Add a new ruleset called "Protected branches" and include the following changes:
     - Enforcement status: active
