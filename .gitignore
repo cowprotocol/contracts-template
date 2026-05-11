@@ -12,3 +12,7 @@ docs/
 
 # Dotenv file
 .env
+
+# Local development dependencies
+dev/node_modules/
+dev/.venv/
