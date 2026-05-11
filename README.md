@@ -61,10 +61,15 @@ forge snapshot
 forge script script/Counter.s.sol:CounterScript --rpc-url <your_rpc_url> --private-key <your_private_key>
 ```
 
+## License
+
+Licensed under either of [MIT license](LICENSE-MIT) or [Apache License, Version 2.0](LICENSE-APACHE) at your option.
+
 ## New project creation checklist
 
 The following operations need to be performed after this repository has been created.
 
+- [ ] Discuss and confirm the project license before starting implementation work
 - [ ] In GitHub repo settings:
   - [ ] Add a new ruleset called "Protected branches" and include the following changes:
     - Enforcement status: active
