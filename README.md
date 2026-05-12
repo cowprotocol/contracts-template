@@ -89,6 +89,14 @@ forge script script/Counter.s.sol:CounterScript --rpc-url <your_rpc_url> --priva
 
 The following operations need to be performed after this repository has been created.
 
+- [ ] Discuss and confirm the project license with the team lead before starting implementation work. You must set this up before writing project code.
+  - [ ] The license is very likely going to be one of the following:
+    - [ ] `MIT OR Apache-2.0` for projects with low strategic relevance (included by default in the template).
+    - [ ] `LGPL-3.0-or-later` for projects with high strategic relevance.
+    - [ ] In some cases, a different license may be needed.
+  - [ ] If it's `MIT OR Apache-2.0`, the license is already included. Otherwise, remove the existing license files and add the selected license as a file in the repository root.
+  - [ ] Update `dev/package.json` with the selected license.
+  - [ ] Update each Solidity smart contract's `SPDX-License-Identifier` with the selected license.
 - [ ] In GitHub repo settings:
   - [ ] Add a new ruleset called "Protected branches" and include the following changes:
     - Enforcement status: active
