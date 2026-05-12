@@ -34,24 +34,56 @@ just test
 just fmt
 ```
 
-### Pre-commit hooks
+### Local tooling
 
-Install `pre-commit` in the local Python venv with:
+Solhint and Slither are pinned as local development dependencies under `dev/`.
+
+The pnpm and uv setups wait 7 days before installing newly released packages, matching CoW repos and giving more review time than a 2-day delay.
+
+Install them with:
 
 ```shell
+pnpm --dir dev install --frozen-lockfile
 uv sync --project dev
-dev/.venv/bin/pre-commit --version
 ```
+
+Use the local binaries when running these tools:
+
+```shell
+dev/node_modules/.bin/solhint --version
+uv run --project dev slither --version
+```
+
+### Pre-commit hooks
 
 Install the hooks with:
 
 ```shell
-dev/.venv/bin/pre-commit install --hook-type pre-commit --hook-type pre-push
+uv run --project dev pre-commit install --hook-type pre-commit --hook-type pre-push
 ```
 
 The pre-commit hook runs `just lint`.
 The pre-push hooks run `just test`, `just slither`, and `just coverage-check`.
 You can bypass hooks with `--no-verify`, but CI remains the source of truth.
+
+### Slither
+
+Slither uses the pinned local Python dependency and checks contracts under `src` by default:
+
+```shell
+uv run --project dev slither src --config-file slither.config.json
+```
+
+### Solhint
+
+Solhint uses the pinned local binary:
+
+```shell
+dev/node_modules/.bin/solhint --max-warnings 0 '**/*.sol'
+```
+
+The root config applies to all Solidity files.
+The `script/` and `test/` folders have a small override config for their own style.
 
 ### Gas Snapshots
 
