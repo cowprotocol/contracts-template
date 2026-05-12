@@ -38,21 +38,28 @@ just fmt
 
 Solhint and Slither are pinned as local development dependencies under `dev/`.
 
-The pnpm setup waits 7 days before installing newly released packages, matching CoW repos and giving more review time than a 2-day delay.
+The pnpm and uv setups wait 7 days before installing newly released packages, matching CoW repos and giving more review time than a 2-day delay.
 
 Install them with:
 
 ```shell
 pnpm --dir dev install --frozen-lockfile
-python3 -m venv dev/.venv
-dev/.venv/bin/pip install -r dev/requirements.txt
+uv sync --project dev
 ```
 
 Use the local binaries when running these tools:
 
 ```shell
 dev/node_modules/.bin/solhint --version
-dev/.venv/bin/slither --version
+uv run --project dev slither --version
+```
+
+### Slither
+
+Slither uses the pinned local Python dependency and checks contracts under `src` by default:
+
+```shell
+uv run --project dev slither src --config-file slither.config.json
 ```
 
 ### Solhint
