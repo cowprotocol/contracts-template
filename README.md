@@ -47,7 +47,7 @@ Use the local binaries when running these tools:
 
 ```shell
 dev/node_modules/.bin/solhint --version
-dev/.venv/bin/slither --version
+uv run --project dev slither --version
 ```
 
 ### Slither
@@ -55,7 +55,7 @@ dev/.venv/bin/slither --version
 Slither uses the pinned local Python dependency and checks contracts under `src` by default:
 
 ```shell
-dev/.venv/bin/slither src --config-file slither.config.json
+uv run --project dev slither src --config-file slither.config.json
 ```
 
 ### Solhint
