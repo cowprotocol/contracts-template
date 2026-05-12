@@ -7,6 +7,10 @@ JUST := just_executable()
 # Runs `just help`
 default: help
 
+# Register pre-push hooks
+register-hooks:
+    uv run --project dev pre-commit install --hook-type pre-push
+
 # Show available recipes
 help:
     {{JUST}} --list

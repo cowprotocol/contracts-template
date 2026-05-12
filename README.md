@@ -59,11 +59,10 @@ just slither
 Install the hooks with:
 
 ```shell
-uv run --project dev pre-commit install --hook-type pre-commit --hook-type pre-push
+just register-hooks
 ```
 
-The pre-commit hook runs `just lint`.
-The pre-push hooks run `just test`, `just slither`, and `just coverage-check`.
+The pre-push hooks run `just lint`, `just slither`, and `just coverage-check`.
 You can bypass hooks with `--no-verify`, but CI remains the source of truth.
 
 ### Slither
