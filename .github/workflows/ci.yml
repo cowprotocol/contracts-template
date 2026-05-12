@@ -74,17 +74,5 @@ jobs:
       - uses: ./.github/actions/setup
       - name: Test
         run: just test
-
-  coverage:
-    name: Coverage
-    runs-on: ubuntu-latest
-    permissions:
-      contents: read
-    steps:
-      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # action v6.0.2
-        with:
-          persist-credentials: false
-          submodules: recursive
-      - uses: ./.github/actions/setup
       - name: Coverage
         run: just coverage-check
