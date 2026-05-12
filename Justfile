@@ -2,6 +2,9 @@ set shell := ["bash", "-eu", "-o", "pipefail", "-c"]
 set quiet # Doesn't print the command that is being run
 
 COVERAGE_MIN := env_var_or_default("COVERAGE_MIN", "100")
+SOLHINT := "dev/node_modules/.bin/solhint" # Binary path for local Solhint installation
+FORGE := "dev/node_modules/.bin/forge" # Binary path for local Forge installation
+FOUNDRY_BIN := "dev/node_modules/.bin" # Directory containing the local Foundry binaries
 JUST := just_executable()
 
 # Runs `just help`
@@ -11,38 +14,38 @@ default: help
 help:
     {{JUST}} --list
 
-# Compile contracts with `forge build`
+# Compile contracts
 build:
-    forge build
+    {{FORGE}} build
 
-# Compile all contracts with `forge build --force`
+# Compile all contracts
 build-all:
-    forge build --force
+    {{FORGE}} build --force
 
-# Format Solidity sources with `forge fmt`
+# Format Solidity sources
 fmt:
-    forge fmt
+    {{FORGE}} fmt
 
 # Check formatting and run `solhint` on `src`/`script`/`test`
 lint:
-    forge fmt --check
-    dev/node_modules/.bin/solhint --max-warnings 0 '**/*.sol'
+    {{FORGE}} fmt --check
+    {{SOLHINT}} --max-warnings 0 '**/*.sol'
 
 # Run Slither static analysis on `src`
 slither:
-    dev/.venv/bin/slither src --config-file slither.config.json
+    PATH="$PWD/{{FOUNDRY_BIN}}:$PATH" uv run --project dev slither src --config-file slither.config.json
 
-# Run tests with `forge test`
+# Run tests
 test:
-    forge test --isolate -vvv --show-progress --gas-snapshot-check true
+    {{FORGE}} test --isolate -vvv --show-progress --gas-snapshot-check true
 
 # Print coverage summary
 coverage-summary:
-    forge coverage --no-match-coverage "^(test|script)/" --report summary
+    {{FORGE}} coverage --no-match-coverage "^(test|script)/" --report summary
 
 # Generate lcov coverage report
 coverage-lcov:
-    forge coverage --no-match-coverage "^(test|script)/" --report lcov
+    {{FORGE}} coverage --no-match-coverage "^(test|script)/" --report lcov
 
 # Fail if the minimum of all four coverage metrics (lines/statements/branches/funcs) on the `Total` row is below `COVERAGE_MIN` (default `100`)
 coverage-check:
@@ -66,9 +69,9 @@ coverage-check:
         }' coverage.txt
     rm coverage.txt
 
-# Generate gas snapshots with `forge snapshot`
+# Generate gas snapshots
 snapshot:
-    forge snapshot --isolate --desc --show-progress
+    {{FORGE}} snapshot --isolate --desc --show-progress
 
 # Run build, lint, slither, coverage-check, snapshot
 all: build lint slither coverage-check snapshot

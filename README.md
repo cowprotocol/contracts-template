@@ -51,7 +51,7 @@ Use the local binaries when running these tools:
 
 ```shell
 dev/node_modules/.bin/solhint --version
-uv run --project dev slither --version
+PATH="$PWD/dev/node_modules/.bin:$PATH" uv run --project dev slither --version
 ```
 
 ### Slither
@@ -59,7 +59,7 @@ uv run --project dev slither --version
 Slither uses the pinned local Python dependency and checks contracts under `src` by default:
 
 ```shell
-uv run --project dev slither src --config-file slither.config.json
+just slither
 ```
 
 ### Solhint
@@ -67,7 +67,7 @@ uv run --project dev slither src --config-file slither.config.json
 Solhint uses the pinned local binary:
 
 ```shell
-dev/node_modules/.bin/solhint --max-warnings 0 '**/*.sol'
+just lint
 ```
 
 The root config applies to all Solidity files.
