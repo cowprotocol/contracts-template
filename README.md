@@ -8,10 +8,14 @@ It will contain some useful configuration files and scripts, that can be used al
 
 ## Usage
 
+### Just commands
+
+Install `just` on your machine, then run `just help` to see the available commands.
+
 ### Build
 
 ```shell
-forge build
+just build
 ```
 
 Project contracts should keep simple caret pragmas like `^0.8` so downstream projects can import them with older compatible Solidity 0.8 compilers.
@@ -21,13 +25,13 @@ If specific features are needed (like PUSH0 in 0.8.20 for gas optimizations or t
 ### Test
 
 ```shell
-forge test
+just test
 ```
 
 ### Format
 
 ```shell
-forge fmt
+just fmt
 ```
 
 ### Local tooling
@@ -65,7 +69,7 @@ The `script/` and `test/` folders have a small override config for their own sty
 ### Gas Snapshots
 
 ```shell
-forge snapshot
+just snapshot
 ```
 
 ### Deploy

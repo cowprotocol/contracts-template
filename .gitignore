@@ -17,5 +17,10 @@ docs/
 dev/node_modules/
 dev/.venv/
 
+# Local reports
+coverage.txt
+lcov.info
+.gas-snapshot
+
 # pnpm cache
 .pnpm-store/
