@@ -47,11 +47,11 @@ pnpm --dir dev install --frozen-lockfile
 uv sync --project dev
 ```
 
-Use the local binaries when running these tools:
+Run the pinned local tools through `just`:
 
 ```shell
-dev/node_modules/.bin/solhint --version
-uv run --project dev slither --version
+just lint
+just slither
 ```
 
 ### Pre-commit hooks
@@ -71,15 +71,15 @@ You can bypass hooks with `--no-verify`, but CI remains the source of truth.
 Slither uses the pinned local Python dependency and checks contracts under `src` by default:
 
 ```shell
-uv run --project dev slither src --config-file slither.config.json
+just slither
 ```
 
 ### Solhint
 
-Solhint uses the pinned local binary:
+Solhint uses the pinned local binary through `just lint`:
 
 ```shell
-dev/node_modules/.bin/solhint --max-warnings 0 '**/*.sol'
+just lint
 ```
 
 The root config applies to all Solidity files.
