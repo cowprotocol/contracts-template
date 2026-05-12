@@ -8,10 +8,14 @@ It will contain some useful configuration files and scripts, that can be used al
 
 ## Usage
 
+### Just commands
+
+Install `just` on your machine, then run `just help` to see the available commands.
+
 ### Build
 
 ```shell
-dev/node_modules/.bin/forge build
+just build
 ```
 
 Project contracts should keep simple caret pragmas like `^0.8` so downstream projects can import them with older compatible Solidity 0.8 compilers.
@@ -21,34 +25,41 @@ If specific features are needed (like PUSH0 in 0.8.20 for gas optimizations or t
 ### Test
 
 ```shell
-dev/node_modules/.bin/forge test
+just test
 ```
 
 ### Format
 
 ```shell
-dev/node_modules/.bin/forge fmt
+just fmt
 ```
 
 ### Local tooling
 
 Solhint and Slither are pinned as local development dependencies under `dev/`.
 
-The pnpm setup waits 7 days before installing newly released packages, matching CoW repos and giving more review time than a 2-day delay.
+The pnpm and uv setups wait 7 days before installing newly released packages, matching CoW repos and giving more review time than a 2-day delay.
 
 Install them with:
 
 ```shell
 pnpm --dir dev install --frozen-lockfile
-python3 -m venv dev/.venv
-dev/.venv/bin/pip install -r dev/requirements.txt
+uv sync --project dev
 ```
 
 Use the local binaries when running these tools:
 
 ```shell
 dev/node_modules/.bin/solhint --version
-dev/.venv/bin/slither --version
+uv run --project dev slither --version
+```
+
+### Slither
+
+Slither uses the pinned local Python dependency and checks contracts under `src` by default:
+
+```shell
+uv run --project dev slither src --config-file slither.config.json
 ```
 
 ### Solhint
@@ -65,7 +76,7 @@ The `script/` and `test/` folders have a small override config for their own sty
 ### Gas Snapshots
 
 ```shell
-dev/node_modules/.bin/forge snapshot
+just snapshot
 ```
 
 ### Deploy
