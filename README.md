@@ -44,10 +44,10 @@ Install them with:
 
 ```shell
 pnpm --dir dev install --frozen-lockfile
-uv sync --project dev
+uv sync --project dev --locked
 ```
 
-Run the pinned local tools through `just`:
+Run the pinned local tools through `just`. `just lint` checks Forge formatting and Solhint, and `just slither` checks contracts under `src`.
 
 ```shell
 just lint
@@ -64,22 +64,6 @@ just register-hooks
 
 The pre-push hooks run `just lint`, `just slither`, and `just coverage-check`.
 You can bypass hooks with `--no-verify`, but CI remains the source of truth.
-
-### Slither
-
-Slither uses the pinned local Python dependency and checks contracts under `src` by default:
-
-```shell
-just slither
-```
-
-### Solhint
-
-Solhint uses the pinned local binary through `just lint`:
-
-```shell
-just lint
-```
 
 The root config applies to all Solidity files.
 The `script/` and `test/` folders have a small override config for their own style.
