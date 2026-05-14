@@ -54,6 +54,18 @@ just lint
 just slither
 ```
 
+Foundry commands can be run through `just`, so they use the pinned local executables:
+
+```shell
+just forge --version
+just anvil --version
+just cast --version
+just chisel --version
+```
+
+Compare the printed versions with `dev/package.json` and `dev/pnpm-lock.yaml`.
+For example, if `@foundry-rs/forge` resolves to `1.7.0`, `just forge --version` should print a version ending in `v1.7.0`.
+
 ### Pre-commit hooks
 
 Install the hooks with:
@@ -77,7 +89,7 @@ just snapshot
 ### Deploy
 
 ```shell
-forge script script/Counter.s.sol:CounterScript --rpc-url <your_rpc_url> --private-key <your_private_key>
+just forge script script/Counter.s.sol:CounterScript --rpc-url <your_rpc_url> --private-key <your_private_key>
 ```
 
 ## New project creation checklist
@@ -105,7 +117,7 @@ The following operations need to be performed after this repository has been cre
     - Select "Pull request title and description" in "Default commit message" option
     - Unckeck "Allow merge commits" option
     - Check "Allow auto-merge" option
-- [ ] Run `forge install` to install the dependencies. This will create a new `foundry.lock` file which you should commit to the project
+- [ ] Run `just forge install` to install the dependencies. This will create a new `foundry.lock` file which you should commit to the project
 - [ ] Set up [Local tooling](#local-tooling) so Solhint and Slither use the pinned project versions
 - [ ] Update the project details in `dev/package.json`, including `name` and `description`
 - [ ] Make sure you use the [latest version of Solidity](https://github.com/argotorg/solidity/releases) by updating the `solc` version in `foundry.toml`
