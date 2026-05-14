@@ -4,6 +4,9 @@ set quiet # Doesn't print the command that is being run
 COVERAGE_MIN := env_var_or_default("COVERAGE_MIN", "100")
 SOLHINT := "dev/node_modules/.bin/solhint" # Binary path for local Solhint installation
 FORGE := "dev/node_modules/.bin/forge" # Binary path for local Forge installation
+ANVIL := "dev/node_modules/.bin/anvil" # Binary path for local Anvil installation
+CAST := "dev/node_modules/.bin/cast" # Binary path for local Cast installation
+CHISEL := "dev/node_modules/.bin/chisel" # Binary path for local Chisel installation
 FOUNDRY_BIN := "dev/node_modules/.bin" # Directory containing the local Foundry binaries
 JUST := just_executable()
 
@@ -13,6 +16,22 @@ default: help
 # Show available recipes
 help:
     {{JUST}} --list
+
+# Run the local Forge binary
+forge *args:
+    {{FORGE}} {{args}}
+
+# Run the local Anvil binary
+anvil *args:
+    {{ANVIL}} {{args}}
+
+# Run the local Cast binary
+cast *args:
+    {{CAST}} {{args}}
+
+# Run the local Chisel binary
+chisel *args:
+    {{CHISEL}} {{args}}
 
 # Compile contracts
 build:
