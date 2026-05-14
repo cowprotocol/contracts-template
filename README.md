@@ -63,6 +63,9 @@ just cast --version
 just chisel --version
 ```
 
+Compare the printed versions with `dev/package.json` and `dev/pnpm-lock.yaml`.
+For example, if `@foundry-rs/forge` resolves to `1.7.0`, `just forge --version` should print a version ending in `v1.7.0`.
+
 ### Pre-commit hooks
 
 Install the hooks with:
