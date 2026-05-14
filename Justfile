@@ -7,7 +7,7 @@ FORGE := "dev/node_modules/.bin/forge" # Binary path for local Forge installatio
 ANVIL := "dev/node_modules/.bin/anvil" # Binary path for local Anvil installation
 CAST := "dev/node_modules/.bin/cast" # Binary path for local Cast installation
 CHISEL := "dev/node_modules/.bin/chisel" # Binary path for local Chisel installation
-FOUNDRY_BIN := "dev/node_modules/.bin" # Directory containing the local Foundry binaries
+NPM_BIN := "dev/node_modules/.bin" # Directory containing the local NPM binaries
 JUST := just_executable()
 
 # Runs `just help`
@@ -52,7 +52,7 @@ lint:
 
 # Run Slither static analysis on `src`
 slither:
-    PATH="$PWD/{{FOUNDRY_BIN}}:$PATH" uv run --project dev slither src --config-file slither.config.json
+    PATH="$PWD/{{NPM_BIN}}:$PATH" uv run --project dev slither src --config-file slither.config.json
 
 # Run tests
 test:
