@@ -60,7 +60,7 @@ slither:
 
 # Run tests
 test:
-    forge test -vvv --show-progress --gas-snapshot-check true
+    {{FORGE}} test -vvv --show-progress --gas-snapshot-check true
 
 # Print coverage summary
 coverage-summary:
@@ -94,7 +94,7 @@ coverage-check:
 
 # Generate gas snapshots
 snapshot:
-    forge snapshot --desc --show-progress
+    {{FORGE}} snapshot --desc --show-progress
 
 # Run build, lint, slither, coverage-check, snapshot
 all: build lint slither coverage-check snapshot
