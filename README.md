@@ -44,14 +44,14 @@ Install them with:
 
 ```shell
 pnpm --dir dev install --frozen-lockfile
-uv sync --project dev
+uv sync --project dev --locked
 ```
 
-Use the local binaries when running these tools:
+Run the pinned local tools through `just`. `just lint` checks Forge formatting and Solhint, and `just slither` checks contracts under `src`.
 
 ```shell
-dev/node_modules/.bin/solhint --version
-PATH="$PWD/dev/node_modules/.bin:$PATH" uv run --project dev slither --version
+just lint
+just slither
 ```
 
 Foundry commands can be run through `just`, so they use the pinned local executables:
@@ -63,21 +63,16 @@ just cast --version
 just chisel --version
 ```
 
-### Slither
+### Pre-commit hooks
 
-Slither uses the pinned local Python dependency and checks contracts under `src` by default:
-
-```shell
-just slither
-```
-
-### Solhint
-
-Solhint uses the pinned local binary:
+Install the hooks with:
 
 ```shell
-just lint
+just register-hooks
 ```
+
+The pre-push hooks run `just lint`, `just slither`, and `just coverage-check`.
+You can bypass hooks with `--no-verify`, but CI remains the source of truth.
 
 The root config applies to all Solidity files.
 The `script/` and `test/` folders have a small override config for their own style.
@@ -98,6 +93,14 @@ just forge script script/Counter.s.sol:CounterScript --rpc-url <your_rpc_url> --
 
 The following operations need to be performed after this repository has been created.
 
+- [ ] Discuss and confirm the project license with the team lead before starting implementation work. You must set this up before writing project code.
+  - [ ] The license is very likely going to be one of the following:
+    - [ ] `MIT OR Apache-2.0` for projects with low strategic relevance (included by default in the template).
+    - [ ] `LGPL-3.0-or-later` for projects with high strategic relevance.
+    - [ ] In some cases, a different license may be needed.
+  - [ ] If it's `MIT OR Apache-2.0`, the license is already included. Otherwise, remove the existing license files and add the selected license as a file in the repository root.
+  - [ ] Update `dev/package.json` with the selected license.
+  - [ ] Update each Solidity smart contract's `SPDX-License-Identifier` with the selected license.
 - [ ] In GitHub repo settings:
   - [ ] Add a new ruleset called "Protected branches" and include the following changes:
     - Enforcement status: active

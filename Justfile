@@ -13,6 +13,10 @@ JUST := just_executable()
 # Runs `just help`
 default: help
 
+# Register pre-push hooks
+register-hooks:
+    uv run --project dev pre-commit install --hook-type pre-push
+
 # Show available recipes
 help:
     {{JUST}} --list
@@ -56,7 +60,7 @@ slither:
 
 # Run tests
 test:
-    {{FORGE}} test --isolate -vvv --show-progress --gas-snapshot-check true
+    forge test -vvv --show-progress --gas-snapshot-check true
 
 # Print coverage summary
 coverage-summary:
@@ -90,7 +94,7 @@ coverage-check:
 
 # Generate gas snapshots
 snapshot:
-    {{FORGE}} snapshot --isolate --desc --show-progress
+    forge snapshot --desc --show-progress
 
 # Run build, lint, slither, coverage-check, snapshot
 all: build lint slither coverage-check snapshot
