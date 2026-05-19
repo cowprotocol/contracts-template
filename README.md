@@ -71,14 +71,6 @@ just lint
 just slither
 ```
 
-You can also check the other Foundry binaries directly:
-
-```shell
-anvil --version
-cast --version
-chisel --version
-```
-
 ### Pre-commit hooks
 
 Install the hooks with:
