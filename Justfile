@@ -43,11 +43,11 @@ test:
 
 # Print coverage summary
 coverage-summary:
-    forge coverage --no-match-coverage "^(test|script)/" --report summary
+    forge coverage --no-match-coverage "^(test|script|lib)/" --report summary
 
 # Generate lcov coverage report
 coverage-lcov:
-    forge coverage --no-match-coverage "^(test|script)/" --report lcov
+    forge coverage --no-match-coverage "^(test|script|lib)/" --report lcov
 
 # Fail if the minimum of all four coverage metrics (lines/statements/branches/funcs) on the `Total` row is below `COVERAGE_MIN` (default `100`)
 coverage-check:
