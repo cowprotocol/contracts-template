@@ -16,22 +16,6 @@ register-hooks:
 help:
     {{JUST}} --list
 
-# Run the local Forge binary
-forge *args:
-    forge {{args}}
-
-# Run the local Anvil binary
-anvil *args:
-    anvil {{args}}
-
-# Run the local Cast binary
-cast *args:
-    cast {{args}}
-
-# Run the local Chisel binary
-chisel *args:
-    chisel {{args}}
-
 # Compile contracts
 build:
     forge build
