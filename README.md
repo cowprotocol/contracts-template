@@ -112,10 +112,7 @@ The following operations need to be performed after this repository has been cre
     - Require linear history
     - Require a pull request before merging
       - Required approvals: 1
-      - Check "Require reviews from specific teams", then click "Add reviewer"
-        - Select Reviewer: `contracts`
-        - Approvals: 1
-        - File patterns: `*`
+      - Check "Require review from Code Owners"
       - Allowed merge methods: Squash
     - Block force pushes
   - [ ] In General → Features → Pull requests:
