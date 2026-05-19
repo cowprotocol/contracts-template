@@ -23,10 +23,6 @@ jobs:
         with:
           persist-credentials: false
           submodules: recursive
-      - name: Install Foundry
-        uses: foundry-rs/foundry-toolchain@c7450ba673e133f5ee30098b3b54f444d3a2ca2d # action v1.8.0
-        with:
-          version: v1.7.0
       - uses: ./.github/actions/setup
       - name: Build
         run: just build
@@ -42,10 +38,6 @@ jobs:
         with:
           persist-credentials: false
           submodules: recursive
-      - name: Install Foundry
-        uses: foundry-rs/foundry-toolchain@c7450ba673e133f5ee30098b3b54f444d3a2ca2d # action v1.8.0
-        with:
-          version: v1.7.0
       - uses: ./.github/actions/setup
       - name: Lint
         run: just lint
@@ -61,10 +53,6 @@ jobs:
         with:
           persist-credentials: false
           submodules: recursive
-      - name: Install Foundry
-        uses: foundry-rs/foundry-toolchain@c7450ba673e133f5ee30098b3b54f444d3a2ca2d # action v1.8.0
-        with:
-          version: v1.7.0
       - uses: ./.github/actions/setup
       - name: Install uv
         uses: astral-sh/setup-uv@08807647e7069bb48b6ef5acd8ec9567f424441b # action v8.1.0
@@ -84,10 +72,6 @@ jobs:
         with:
           persist-credentials: false
           submodules: recursive
-      - name: Install Foundry
-        uses: foundry-rs/foundry-toolchain@c7450ba673e133f5ee30098b3b54f444d3a2ca2d # action v1.8.0
-        with:
-          version: v1.7.0
       - uses: ./.github/actions/setup
       - name: Test
         run: just test
