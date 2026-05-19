@@ -36,6 +36,23 @@ just fmt
 
 ### Local tooling
 
+Foundry should be installed locally and pinned to `v1.7.0`.
+CI uses the same Foundry version.
+
+Install Foundry with:
+
+```shell
+foundryup -i v1.7.0
+```
+
+Check that the expected version is active with:
+
+```shell
+just forge --version
+```
+
+The output should end in `v1.7.0`.
+
 Solhint and Slither are pinned as local development dependencies under `dev/`.
 
 The pnpm and uv setups wait 7 days before installing newly released packages, matching CoW repos and giving more review time than a 2-day delay.
@@ -62,9 +79,6 @@ just anvil --version
 just cast --version
 just chisel --version
 ```
-
-Compare the printed versions with `dev/package.json` and `dev/pnpm-lock.yaml`.
-For example, if `@foundry-rs/forge` resolves to `1.7.0`, `just forge --version` should print a version ending in `v1.7.0`.
 
 ### Pre-commit hooks
 
