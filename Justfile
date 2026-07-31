@@ -2,6 +2,7 @@ set shell := ["bash", "-eu", "-o", "pipefail", "-c"]
 set quiet # Doesn't print the command that is being run
 
 COVERAGE_MIN := env_var_or_default("COVERAGE_MIN", "100")
+SOLHINT := "dev/node_modules/.bin/solhint" # Binary path for local Solhint installation
 JUST := just_executable()
 
 # Runs `just help`
@@ -15,48 +16,44 @@ register-hooks:
 help:
     {{JUST}} --list
 
-# Compile contracts with `forge build`
+# Compile contracts
 build:
     forge build
 
-# Compile all contracts with `forge build --force`
+# Compile all contracts
 build-all:
     forge build --force
 
-# Format Solidity sources with `forge fmt`
+# Format Solidity sources
 fmt:
     forge fmt
 
 # Check formatting and run `solhint` on `src`/`script`/`test`
 lint:
     forge fmt --check
-    dev/node_modules/.bin/solhint --max-warnings 0 '**/*.sol'
+    {{SOLHINT}} --max-warnings 0 '**/*.sol'
 
 # Run Slither static analysis on `src`
 slither:
-    dev/.venv/bin/slither src --config-file slither.config.json
+    uv run --project dev slither src --config-file slither.config.json
 
-# Run tests with `forge test`
+# Run tests
 test:
     forge test -vvv --show-progress --gas-snapshot-check true
 
 # Print coverage summary
 coverage-summary:
-    FOUNDRY_GAS_SNAPSHOT_EMIT=false forge coverage --no-match-coverage "^(test|script)/" --report summary
+    FOUNDRY_GAS_SNAPSHOT_EMIT=false forge coverage --no-match-coverage "^(test|script|lib)/" --report summary
 
 # Generate lcov coverage report
 coverage-lcov:
-    FOUNDRY_GAS_SNAPSHOT_EMIT=false forge coverage --no-match-coverage "^(test|script)/" --report lcov
+    FOUNDRY_GAS_SNAPSHOT_EMIT=false forge coverage --no-match-coverage "^(test|script|lib)/" --report lcov
 
 # Fail if the minimum of all four coverage metrics (lines/statements/branches/funcs) on the `Total` row is below `COVERAGE_MIN` (default `100`)
 coverage-check:
     # Fields on the `| Total | ... |` row are: $4=lines, $7=statements, $10=branches, $13=funcs (whitespace-split, `%` stripped)
-    @trap 'rm -f coverage.txt' EXIT; \
-    if ! {{JUST}} coverage-summary > coverage.txt 2>&1; then \
-        cat coverage.txt; \
-        exit 1; \
-    fi; \
-    cat coverage.txt; \
+    @output="$({{JUST}} coverage-summary)"; \
+    printf '%s\n' "$output"; \
     awk -v threshold={{COVERAGE_MIN}} '\
         BEGIN { labels[4]="lines"; labels[7]="statements"; labels[10]="branches"; labels[13]="funcs"; min=100; below="" } \
         /^\| Total/ { \
@@ -71,9 +68,9 @@ coverage-check:
         END { \
             if (!found) { print "Failed to extract coverage percentage."; exit 1 } \
             if (min < threshold) { printf "\nMetrics below minimum threshold of %s%%:\n%s\n", threshold, below; exit 1 } \
-        }' coverage.txt
+        }' <<< "$output"
 
-# Generate gas snapshots with `forge snapshot`
+# Generate gas snapshots
 snapshot:
     forge snapshot --desc --show-progress
 

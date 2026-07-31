@@ -36,6 +36,23 @@ just fmt
 
 ### Local tooling
 
+Foundry should be installed locally and pinned to `v1.7.1`.
+CI uses the same Foundry version.
+
+Install Foundry with:
+
+```shell
+foundryup --install v1.7.1
+```
+
+Check that the expected version is active with:
+
+```shell
+forge --version
+```
+
+The output should end in `v1.7.1`.
+
 Solhint and Slither are pinned as local development dependencies under `dev/`.
 
 The pnpm and uv setups wait 7 days before installing newly released packages, matching CoW repos and giving more review time than a 2-day delay.
