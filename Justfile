@@ -43,17 +43,17 @@ test:
 
 # Print coverage summary
 coverage-summary:
-    forge coverage --no-match-coverage "^(test|script|lib)/" --report summary
+    FOUNDRY_GAS_SNAPSHOT_EMIT=false forge coverage --no-match-coverage "^(test|script|lib)/" --report summary
 
 # Generate lcov coverage report
 coverage-lcov:
-    forge coverage --no-match-coverage "^(test|script|lib)/" --report lcov
+    FOUNDRY_GAS_SNAPSHOT_EMIT=false forge coverage --no-match-coverage "^(test|script|lib)/" --report lcov
 
 # Fail if the minimum of all four coverage metrics (lines/statements/branches/funcs) on the `Total` row is below `COVERAGE_MIN` (default `100`)
 coverage-check:
-    @{{JUST}} coverage-summary > coverage.txt
-    cat coverage.txt
     # Fields on the `| Total | ... |` row are: $4=lines, $7=statements, $10=branches, $13=funcs (whitespace-split, `%` stripped)
+    @output="$({{JUST}} coverage-summary)"; \
+    printf '%s\n' "$output"; \
     awk -v threshold={{COVERAGE_MIN}} '\
         BEGIN { labels[4]="lines"; labels[7]="statements"; labels[10]="branches"; labels[13]="funcs"; min=100; below="" } \
         /^\| Total/ { \
@@ -68,8 +68,7 @@ coverage-check:
         END { \
             if (!found) { print "Failed to extract coverage percentage."; exit 1 } \
             if (min < threshold) { printf "\nMetrics below minimum threshold of %s%%:\n%s\n", threshold, below; exit 1 } \
-        }' coverage.txt
-    rm coverage.txt
+        }' <<< "$output"
 
 # Generate gas snapshots
 snapshot:
