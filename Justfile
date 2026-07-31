@@ -42,20 +42,16 @@ test:
 
 # Print coverage summary
 coverage-summary:
-    forge coverage --no-match-coverage "^(test|script)/" --report summary
+    FOUNDRY_GAS_SNAPSHOT_EMIT=false forge coverage --no-match-coverage "^(test|script)/" --report summary
 
 # Generate lcov coverage report
 coverage-lcov:
-    forge coverage --no-match-coverage "^(test|script)/" --report lcov
+    FOUNDRY_GAS_SNAPSHOT_EMIT=false forge coverage --no-match-coverage "^(test|script)/" --report lcov
 
 # Fail if the minimum of all four coverage metrics (lines/statements/branches/funcs) on the `Total` row is below `COVERAGE_MIN` (default `100`)
 coverage-check:
     # Fields on the `| Total | ... |` row are: $4=lines, $7=statements, $10=branches, $13=funcs (whitespace-split, `%` stripped)
-    @tmp_dir="$(mktemp -d)"; \
-    snapshot_patch="$tmp_dir/snapshots.patch"; \
-    git diff --binary -- snapshots > "$snapshot_patch"; \
-    cleanup() { git clean -fd -- snapshots >/dev/null 2>&1 || true; git restore --worktree snapshots 2>/dev/null || true; if [ -s "$snapshot_patch" ]; then git apply "$snapshot_patch"; fi; rm -rf "$tmp_dir"; rm -f coverage.txt; }; \
-    trap cleanup EXIT; \
+    @trap 'rm -f coverage.txt' EXIT; \
     if ! {{JUST}} coverage-summary > coverage.txt 2>&1; then \
         cat coverage.txt; \
         exit 1; \
