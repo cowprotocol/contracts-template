@@ -110,12 +110,14 @@ The following operations need to be performed after this repository has been cre
   - [ ] Update `dev/package.json` with the selected license.
   - [ ] Update each Solidity smart contract's `SPDX-License-Identifier` with the selected license.
 - [ ] In GitHub repo settings:
+  - [ ] In Collaborators and teams → Add teams, add "Contracts" team to the repo
   - [ ] Add a new ruleset called "Protected branches" and include the following changes:
     - Enforcement status: active
     - Target branches: Include default branch
     - Require linear history
     - Require a pull request before merging
       - Required approvals: 1
+      - Check "Require review from Code Owners"
       - Allowed merge methods: Squash
     - Block force pushes
   - [ ] In General → Features → Pull requests:
